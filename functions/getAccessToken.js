@@ -13,17 +13,17 @@ const getAccessToken = async (auth_code) => {
         const params = new URLSearchParams({
             grant_type: 'authorization_code',
             code: auth_code,
-            redirect_uri: "http://localhost:5173/auth/linkedin",
+            redirect_uri: REDIRECT_URI,
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
         });
-        //console.log("redirect uri", encodeURIComponent("http://localhost:5173/auth/linkedin"));
         try {
             const response = await axios.post(tokenUrl, params, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded', 
                 },
             });
+            
             return response.data; 
         } catch (error) {
             console.error('Error fetching access token:', error.response ? error.response.data : error.message);
